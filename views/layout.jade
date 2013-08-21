@@ -1,7 +1,9 @@
 doctype 5
-html
+html(ng-app='testApp')
   head
-    title= title
+    meta(charset='utf8')
+    base(href='/')
+    title = 'Angular Test'
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    block body
