@@ -11,6 +11,10 @@ var express = require('express'),
 
 var app = express();
 
+var DB = require('./util/db.js').DB;
+var db = new DB();
+db.open();
+
 // all environments
 app.set('port', process.env.PORT || 3009);
 app.set('views', __dirname + '/views');
@@ -32,11 +36,10 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // API:
-app.get('/api/test', api.test);
-app.get('/api/testcount', api.testcount);
 app.post('/api/enas', api.echonest_artist_search);
 app.post('/api/sg', api.songkick_gigography);
 app.post('/api/imgs', api.flickr_image_search);
+app.put('/api/saveArtist', api.save_artist);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

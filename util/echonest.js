@@ -17,8 +17,9 @@ APIEchoNest.artist_search = function (artist_input, cb) {
             if (artist.foreign_ids !== undefined &&
                 artist.foreign_ids[0].catalog == 'songkick') {
                 var a = {};
-                a.artist_name = artist.name;
-                a.skid = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
+                a.name = artist.name;
+                a.echo_nest_id = artist.id;
+                a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
                 artists.push(a);
             }
         });

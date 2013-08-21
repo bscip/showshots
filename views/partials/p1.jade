@@ -1,14 +1,8 @@
 div#p1_container
+  h3 hey this is page 1
   input(ng-model="artist_input")
   button(ng-click="artist_search()") Search
   br
   div(ng-repeat='artist in artists')
-    span Artist:  {{artist.artist_name}}
-    a(href='page2/{{artist.skid}}') Find Shows
-  br
-  div
-    h4 Shows:
-    div(ng-repeat='show in shows')
-      span {{show.id}}) {{show.artist}} at {{show.venue}}
-  div
-    a(href='page2') Page2
+    span Artist:  {{artist.name}}
+    a(href='page2/{{artist.songkick_id}}') Find Shows

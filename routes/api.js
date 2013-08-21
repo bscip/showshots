@@ -2,6 +2,9 @@ var APIEchoNest = require('../util/echonest.js'),
     APISongkick = require('../util/songkick.js'),
     APIFlickr   = require('../util/flickr.js');
 
+var DB = require('../util/db.js').DB;
+var db = new DB();
+
 var data = {
     "test": [
         {"artist":"radiohead","venue":"O2 Academy"},
@@ -10,23 +13,6 @@ var data = {
     ]
 };
 
-var cur_image_set = {};
-
-exports.test = function(req, res) {
-    var retdata = [];
-    data.test.forEach(function (show,i) {
-        retdata.push({id:i+1,artist:show.artist,venue:show.venue});
-    });
-    res.json({
-        shows: retdata
-    });
-};
-
-exports.testcount = function(req, res) {
-    res.json({
-        testcount: data.test.length
-    });
-};
 
 exports.echonest_artist_search = function(req, res) {
     APIEchoNest.artist_search(req.body.artist_input, function(artists) {
@@ -41,7 +27,7 @@ exports.echonest_artist_search = function(req, res) {
 };
 
 exports.songkick_gigography = function(req, res) {
-    APISongkick.artist_gigography(req.body.skid, function(shows) {
+    APISongkick.artist_gigography(req.body.songkick_id, function(shows) {
         var ret = false;
         if (shows !== undefined) {
             ret = JSON.parse(shows);
@@ -56,7 +42,6 @@ exports.flickr_image_search = function(req, res) {
     APIFlickr.image_search(req.body.params, function(images) {
         var ret = false;
         if (images !== undefined) {
-            cur_image_set = images;
             ret = JSON.parse(images);
         }
         res.json({
@@ -65,3 +50,13 @@ exports.flickr_image_search = function(req, res) {
     });
 };
 
+exports.save_artist = function(req, res) {
+    db.saveArtist(req.body.params, function(err, count) {
+        console.log(err);
+        console.log(count);
+        console.log('saved an artist');
+        res.json({
+            count: count
+        });
+    });
+};
