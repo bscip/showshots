@@ -25,7 +25,6 @@ DB.prototype.findArtist = function(params, cb) {
 DB.prototype.saveShow = function (params, cb) {
     show = new MM.Show(params);
     show.save(function(err,savedShow,count) {
-        console.log(err);
         cb(err,count);
     });
 };

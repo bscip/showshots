@@ -32,7 +32,7 @@ function Page3Ctrl($scope, $http, $routeParams, $q, showParams) {
         $scope.images = comboRes[1].data.images;
         var imgs = [];
         $scope.images.forEach(function(img,i) {
-            imgs.push(img);
+            imgs.push($http.put('/api/saveImage', {'params':img}));
         });
         $q.all(imgs).then(function(comboRes) {
             // do something after saving images?
