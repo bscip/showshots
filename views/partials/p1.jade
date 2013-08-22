@@ -1,7 +1,7 @@
-div#p1_container
-  h3 hey this is page 1
-  input(ng-model="artist_input")
-  button(ng-click="artist_search()") Search
+div.jumbotron
+  h4 Search for a new Artist
+  input(ng-model="artist_input", type="text", class="form-control form-group")
+  button(ng-click="artist_search()", type="submit", class="btn btn-success") Search
   br
   div(ng-repeat='artist in artists')
     span Artist:  {{artist.name}}
