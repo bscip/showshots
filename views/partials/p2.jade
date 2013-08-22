@@ -1,8 +1,9 @@
-div#p2_container
-  h3 hey this is page 2
-  div(ng-repeat='show in shows')
-    div
-      a(href='page3/{{show.songkick_event_id}}') Find Images
-      span {{show.show_details}}
-  div
-    a(href='/') Page1
+div.row-fluid
+  span.span12
+    h4 Here are the most recent shows
+  hr
+  div(ng-repeat='show in shows', class="row-fluid show-row")
+    span.span2
+      button(ng-click="show_select({{show.songkick_event_id}})", type="submit", class="btn-small btn-success") Find Images
+    span.10
+      {{show.show_details}}

@@ -1,12 +1,18 @@
-div.jumbotron
-  h4 Search for a new Artist
-  input(ng-model="artist_input", type="text", class="form-control form-group")
-  button(ng-click="artist_search()", type="submit", class="btn btn-success") Search
-  br
-  div(ng-repeat='artist in artists')
-    span Artist:  {{artist.name}}
-    a(href='page2/{{artist.songkick_id}}') Find Shows
-  br
-  div(ng-repeat='prev_artist in prev_artists')
-    span Previous Artists:  {{prev_artist.name}}
-    a(href='page2/{{prev_artist.songkick_id}}') Find Shows
+div.row-fluid
+  div.span6
+    h4 Search for a new Artist
+    br
+    div.btn-group.row-fluid
+      span.span6
+        input(ng-model="artist_input", type="text", class="form-control form-group")
+      span.span6
+        button(ng-click="artist_search()", type="submit", class="btn btn-info") Search
+    div(ng-repeat='artist in artists', class="row-fluid")
+      span.span3
+        button(ng-click="artist_select({{artist.songkick_id}})", type="submit", class="btn-small btn-success") Find Shows
+      span.span9 {{artist.name}}
+  div.span6
+    div.row-fluid
+      div(ng-repeat='prev_artist in prev_artists', class="span3")
+        span Previous Artists:  {{prev_artist.name}}
+        a(href='shows/{{prev_artist.songkick_id}}') Find Shows

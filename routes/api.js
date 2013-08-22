@@ -44,7 +44,7 @@ exports.flickr_image_search = function(req, res) {
 
 exports.save_artist = function(req, res) {
     var songkick_id = req.body.params.songkick_id;
-    db.findArtist({'songkick_id':songkick_id}, function(err, found) {
+    db.findArtists({'songkick_id':songkick_id}, function(err, found) {
         if (!found.length) {
             db.saveArtist(req.body.params, function(err, count) {
                 res.json({
@@ -65,7 +65,7 @@ exports.save_show = function(req, res) {
         'songkick_id': req.body.params.songkick_id,
         'songkick_event_id': req.body.params.songkick_event_id
     };
-    db.findShow(check, function(err, found) {
+    db.findShows(check, function(err, found) {
         if (!found.length) {
             db.saveShow(req.body.params, function(err, count) {
                 res.json({
@@ -87,7 +87,7 @@ exports.save_image = function(req, res) {
         'songkick_event_id': req.body.params.songkick_event_id,
         'flickr_id': req.body.params.flickr_id
     };
-    db.findImage(check, function(err, found) {
+    db.findImages(check, function(err, found) {
         if (!found.length) {
             db.saveImage(req.body.params, function(err, count) {
                 res.json({
@@ -104,9 +104,9 @@ exports.save_image = function(req, res) {
 };
 
 exports.find_artists = function(req, res) {
-    db.findArtist(req.body.params, function(err, artists) {
+    db.findArtists(req.body.params, function(err, artists) {
         res.json({
-            prev_artists: artists
+            artists: artists
         });
     });
 };
@@ -114,7 +114,7 @@ exports.find_artists = function(req, res) {
 exports.find_shows = function(req, res) {
     db.findShows(req.body.params, function(err, shows) {
         res.json({
-            prev_shows: shows
+            shows: shows
         });
     });
 };
@@ -122,7 +122,7 @@ exports.find_shows = function(req, res) {
 exports.find_images = function(req, res) {
     db.findImages(req.body.params, function(err, shows) {
         res.json({
-            prev_images: images
+            images: images
         });
     });
 };

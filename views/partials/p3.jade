@@ -1,8 +1,7 @@
-div#p3_container
-  h3 hey this is page 3
-  div(ng-repeat='image in images')
-    div
-      span 
-      img(ng-src="{{image.url_s}}")
-  div
-    a(href='/') Page1
+div.row-fluid
+  div.span12
+    h4 Here are the images for the show
+  div.row-fluid
+    span(ng-repeat='image in images', class="span3")
+      a(href="{{image.url}}", target="_blank")
+        img(ng-src="{{image.url_m}}", class="img-polaroid")

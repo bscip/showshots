@@ -2,7 +2,7 @@
 
 /* Filters */
 
-angular.module('testApp.filters',[]).
+angular.module('showshotsApp.filters',[]).
     filter('interpolate',['version', function(version) {
         return function(text) {
             return String(text).replace(/\%VERSION\%/mg, version);

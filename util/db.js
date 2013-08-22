@@ -16,7 +16,7 @@ DB.prototype.saveArtist = function(params, cb) {
     });
 };
 
-DB.prototype.findArtist = function(params, cb) {
+DB.prototype.findArtists = function(params, cb) {
     MM.Artist.find(params, function(err, artists) {
         cb(err, artists);
     });
@@ -29,7 +29,7 @@ DB.prototype.saveShow = function (params, cb) {
     });
 };
 
-DB.prototype.findShow = function (params, cb) {
+DB.prototype.findShows = function (params, cb) {
     MM.Show.find(params, function(err, shows) {
         cb(err, shows);
     });
@@ -42,7 +42,7 @@ DB.prototype.saveImage = function (params, cb) {
     });
 };
 
-DB.prototype.findImage = function (params, cb) {
+DB.prototype.findImages = function (params, cb) {
     MM.Image.find(params, function(err, images) {
         cb(err, images);
     });

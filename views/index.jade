@@ -2,17 +2,18 @@ extends layout
 
 block body
   div.container
-    div.header
+    div.masthead
       ul.nav.nav-pills.pull-right
         li.active
           a(href='/') Home
         li
           a(href='/') About
       h2.text-info Show Shots
-    div
-      div(ng-view)
-    div#footer
-      h3 footer
+    hr
+    div#main(ng-view)
+    hr
+    div.footer
+      span#footer.pull-right.muted  (Echo Nest) + (Songkick) + (Flickr)
       
 
   script(src='/js/lib/angular.js')
