@@ -5,14 +5,6 @@ var APIEchoNest = require('../util/echonest.js'),
 var DB = require('../util/db.js').DB;
 var db = new DB();
 
-var data = {
-    "test": [
-        {"artist":"radiohead","venue":"O2 Academy"},
-        {"artist":"radiohead","venue":"The Fillmore"},
-        {"artist":"Pavement","venue":"The Fillmore"}
-    ]
-};
-
 
 exports.echonest_artist_search = function(req, res) {
     APIEchoNest.artist_search(req.body.artist_input, function(artists) {
@@ -51,12 +43,86 @@ exports.flickr_image_search = function(req, res) {
 };
 
 exports.save_artist = function(req, res) {
-    db.saveArtist(req.body.params, function(err, count) {
-        console.log(err);
-        console.log(count);
-        console.log('saved an artist');
+    var songkick_id = req.body.params.songkick_id;
+    db.findArtist({'songkick_id':songkick_id}, function(err, found) {
+        if (!found.length) {
+            db.saveArtist(req.body.params, function(err, count) {
+                res.json({
+                    count: count
+                });
+            });
+        }
+        else {
+            res.json({
+                count: found.length
+            });
+        }
+    });
+};
+
+exports.save_show = function(req, res) {
+    var check = {
+        'songkick_id': req.body.params.songkick_id,
+        'songkick_event_id': req.body.params.songkick_event_id
+    };
+    db.findShow(check, function(err, found) {
+        if (!found.length) {
+            db.saveShow(req.body.params, function(err, count) {
+                res.json({
+                    count: count
+                });
+            });
+        }
+        else {
+            res.json({
+                count: found.length
+            });
+        }
+    });
+};
+
+exports.save_image = function(req, res) {
+    var check = {
+        'songkick_id': req.body.params.songkick_id,
+        'songkick_event_id': req.body.params.songkick_event_id,
+        'flickr_id': req.body.params.flickr_id
+    };
+    db.findImage(check, function(err, found) {
+        if (!found.length) {
+            db.saveImage(req.body.params, function(err, count) {
+                res.json({
+                    count: count
+                });
+            });
+        }
+        else {
+            res.json({
+                count: found.length
+            });
+        }
+    });
+};
+
+exports.find_artists = function(req, res) {
+    db.findArtist(req.body.params, function(err, artists) {
         res.json({
-            count: count
+            prev_artists: artists
+        });
+    });
+};
+
+exports.find_shows = function(req, res) {
+    db.findShows(req.body.params, function(err, shows) {
+        res.json({
+            prev_shows: shows
+        });
+    });
+};
+
+exports.find_images = function(req, res) {
+    db.findImages(req.body.params, function(err, shows) {
+        res.json({
+            prev_images: images
         });
     });
 };

@@ -36,10 +36,13 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // API:
+app.get('/api/pa', api.find_artists);
 app.post('/api/enas', api.echonest_artist_search);
 app.post('/api/sg', api.songkick_gigography);
 app.post('/api/imgs', api.flickr_image_search);
 app.put('/api/saveArtist', api.save_artist);
+app.put('/api/saveShow', api.save_show);
+app.put('/api/saveImage', api.save_image);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

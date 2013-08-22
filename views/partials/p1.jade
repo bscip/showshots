@@ -6,3 +6,7 @@ div#p1_container
   div(ng-repeat='artist in artists')
     span Artist:  {{artist.name}}
     a(href='page2/{{artist.songkick_id}}') Find Shows
+  br
+  div(ng-repeat='prev_artist in prev_artists')
+    span Previous Artists:  {{prev_artist.name}}
+    a(href='page2/{{prev_artist.songkick_id}}') Find Shows

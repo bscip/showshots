@@ -8,7 +8,6 @@ APISongkick.artist_gigography = function (skid, cb) {
     var url = 'http://api.songkick.com/api/3.0/artists/'+skid;
         url += '/gigography.json?apikey='+secret.songkick_api_key;
         url += '&order=desc&page=1&per_page=50';
-        //url += '&jsoncallback=?';
 
     var shows = [];
     request.get({url: url, json: true}, function(error, resp, data) {
@@ -30,21 +29,26 @@ APISongkick.artist_gigography = function (skid, cb) {
                 }
             });
 
-            var songkick_show_id = show.id;
+            var songkick_event_id = show.id;
             var venue_name = show.venue.displayName;
             var metro_name = show.venue.metroArea.displayName;
             var country_name = show.venue.metroArea.country.displayName;
             var show_details = show.displayName;
+            var show_url = show.uri;
 
             var curshow = {
-                'songkick_show_id':  songkick_show_id,
-                'performer':  performer,
+                'songkick_id':  skid,
+                'songkick_event_id':  songkick_event_id,
+                'performers':  performer,
+                'date':  show.start.date,
+                'datetime':  show.start.datetime,
                 'min_time':  min_time,
                 'max_time':  max_time,
                 'venue_name': venue_name,
                 'metro_name': metro_name,
                 'country_name': country_name,
-                'show_details': show_details
+                'show_details': show_details,
+                'url': show_url
             };
 
             shows.push(curshow);

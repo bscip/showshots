@@ -1,6 +1,11 @@
 'use strict';
 
 function Page1Ctrl($scope, $http, $location, $routeParams, artistParams) {
+    $http.get('/api/pa').
+        success(function(data, status, headrs, config) {
+            $scope.prev_artists = data.prev_artists;
+        });
+
     $scope.artist_search = function() {
         $http.post('/api/enas', {'artist_input':$scope.artist_input}).
             success(function(data, status, headers, config) {
@@ -20,9 +25,18 @@ function Page2Ctrl($scope, $http, $location, $routeParams, $q, showParams, artis
     });
 }
 
-function Page3Ctrl($scope, $http, $routeParams, showParams) {
-    $http.post('/api/imgs', {'params':showParams.getParams($routeParams.id)}).
-        success(function(data, status, headers, config) {
-            $scope.images = data.images;
+function Page3Ctrl($scope, $http, $routeParams, $q, showParams) {
+    var ss = $http.put('/api/saveShow', {'params':showParams.getParams($routeParams.id)});
+    var ai = $http.post('/api/imgs', {'params':showParams.getParams($routeParams.id)});
+    $q.all([ss,ai]).then(function(comboRes) {
+        $scope.images = comboRes[1].data.images;
+        var imgs = [];
+        $scope.images.forEach(function(img,i) {
+            imgs.push(img);
         });
+        $q.all(imgs).then(function(comboRes) {
+            // do something after saving images?
+        });
+    });
+    
 }
