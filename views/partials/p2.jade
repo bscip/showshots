@@ -1,7 +1,7 @@
 div.row-fluid
   span.span12
-    h4 Here are the most recent shows
-  hr
+    h4.text-success Here are the most recent shows for {{cur_artist}}
+  br
   div(ng-repeat='show in shows', class="row-fluid show-row")
     span.span2
       button(ng-click="show_select({{show.songkick_event_id}})", type="submit", class="btn-small show-btn {{ show.images_found ? 'btn-success' : 'btn-inverse' }}") {{ show.images_pre_fetched ? show.num_images+' Images Found' : '(searching)' }}

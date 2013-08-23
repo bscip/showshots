@@ -39,16 +39,18 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/samples', api.find_samples);
 app.get('/api/hottt', api.echonest_hottt);
 app.post('/api/enas/:name', api.echonest_artist_search);
+app.post('/api/enids/:id', api.echonest_id_search);
 app.post('/api/sg/:id', api.songkick_gigography);
+app.post('/api/se/:id', api.songkick_event_lookup);
 app.post('/api/imgs/:id', api.flickr_image_search);
 
 app.put('/api/saveArtist', api.save_artist);
 app.put('/api/saveShow', api.save_show);
 app.put('/api/saveImage', api.save_image);
 
-app.put('/api/findArtists', api.find_artists);
-app.put('/api/findShows', api.find_shows);
-app.put('/api/findImages', api.find_images);
+app.post('/api/findArtists', api.find_artists);
+app.post('/api/findShows', api.find_shows);
+app.post('/api/findImages', api.find_images);
 
 
 // redirect back to index (HTML5 hist)

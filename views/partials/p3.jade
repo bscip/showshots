@@ -1,6 +1,7 @@
 div.row-fluid
   div.span12
-    h4 Here are the images for the show
+    h4.text-success {{ cur_show }} Images!
+  br
   div.row-fluid
     ul.inline
       li(ng-repeat='image in images', class="span3")

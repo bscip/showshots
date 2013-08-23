@@ -25,6 +25,18 @@ exports.echonest_artist_search = function(req, res) {
     });
 };
 
+exports.echonest_id_search = function(req, res) {
+    APIEchoNest.artist_songkick_id_search(req.body.songkick_id, function(artists) {
+        var ret = false;
+        if (artists !== undefined) {
+            ret = JSON.parse(artists);
+        }
+        res.json({
+            artists: ret
+        });
+    });
+};
+
 exports.echonest_hottt = function(req, res) {
     APIEchoNest.hottt(function(artists) {
         var ret = false;
@@ -39,6 +51,18 @@ exports.echonest_hottt = function(req, res) {
 
 exports.songkick_gigography = function(req, res) {
     APISongkick.artist_gigography(req.body.songkick_id, function(shows) {
+        var ret = false;
+        if (shows !== undefined) {
+            ret = JSON.parse(shows);
+        }
+        res.json({
+            shows: ret
+        });
+    });
+};
+
+exports.songkick_event_lookup = function(req, res) {
+    APISongkick.event_lookup(req.body.songkick_event_id, function(shows) {
         var ret = false;
         if (shows !== undefined) {
             ret = JSON.parse(shows);
@@ -65,15 +89,15 @@ exports.save_artist = function(req, res) {
     var songkick_id = req.body.params.songkick_id;
     db.findArtists({'songkick_id':songkick_id}, function(err, found) {
         if (!found.length) {
-            db.saveArtist(req.body.params, function(err, count) {
+            db.saveArtist(req.body.params, function(err, artist) {
                 res.json({
-                    count: count
+                    artist: artist
                 });
             });
         }
         else {
             res.json({
-                count: found.length
+                artist: found
             });
         }
     });
@@ -86,15 +110,15 @@ exports.save_show = function(req, res) {
     };
     db.findShows(check, function(err, found) {
         if (!found.length) {
-            db.saveShow(req.body.params, function(err, count) {
+            db.saveShow(req.body.params, function(err, show) {
                 res.json({
-                    count: count
+                    show: show
                 });
             });
         }
         else {
             res.json({
-                count: found.length
+                show: found
             });
         }
     });
@@ -108,15 +132,15 @@ exports.save_image = function(req, res) {
     };
     db.findImages(check, function(err, found) {
         if (!found.length) {
-            db.saveImage(req.body.params, function(err, count) {
+            db.saveImage(req.body.params, function(err, image) {
                 res.json({
-                    count: count
+                    image: image
                 });
             });
         }
         else {
             res.json({
-                count: found.length
+                image: found
             });
         }
     });
