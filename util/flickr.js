@@ -16,6 +16,7 @@ APIFlickr.image_search = function (params, cb) {
         url += '&nojsoncallback=1';
 
     var images = [];
+    console.log("APIFlickr:  "+url);
     request.get({url: url, json: true}, function(error, resp, data) {
         data.photos.photo.forEach(function (img, i) {
             var curimg = {
