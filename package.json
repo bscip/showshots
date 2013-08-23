@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "showshots",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +7,28 @@
   },
   "dependencies": {
     "express": "3.3.5",
+    "request": "2.27.0",
+    "mongoose": "3.6.17",
+    "moment": "2.1.0",
+    "bouncy": "3.2.0",
+    "bower": "1.2.0",
     "jade": "*"
-  }
+  },
+  "gitHead": "c7c3a4acdad9bbceba686be73fb8fd5b4b436374",
+  "readmeFilename": "README.md",
+  "description": "Show Shots Simple app for finding concert photos from selected artists.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bscip/showshots.git"
+  },
+  "keywords": [
+    "express",
+    "angular",
+    "mongodb",
+    "showshots"
+  ],
+  "author": "Brian Scipione",
+  "license": "BSD"
 }
