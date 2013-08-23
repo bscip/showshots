@@ -10,6 +10,17 @@ body {
     min-height: 400px;
 }
 
+#main-title {
+    display: inline;
+}
+
+#blurb {
+    font-size: 10pt;
+    font-weight: bold;
+    color:  #666;
+    margin:  10px 20px 10px 0px;
+}
+
 .center {
     float: none;
     margin: 0 auto;
@@ -20,7 +31,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', Georgia, Times, serif;
 }
 
-p, div {
+p, div, span {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
