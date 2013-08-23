@@ -58,8 +58,12 @@ p, div {
     margin: 5px auto auto auto;
 }
 
-#footer {
+.footer {
     font-size: 10pt;
 }
 
-
+.footer span a {
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #333;
+}
