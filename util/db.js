@@ -48,4 +48,12 @@ DB.prototype.findImages = function (params, cb) {
     });
 };
 
+
+DB.prototype.findSample = function(cb) {
+    var sample_songkick_ids = [253846,553938,2602966];
+    MM.Artist.where('songkick_id').in(sample_songkick_ids).execFind(function(err,res) {
+        cb(err,res);
+    });
+};
+
 exports.DB = DB;

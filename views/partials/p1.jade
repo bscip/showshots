@@ -1,6 +1,6 @@
 div.row-fluid
   div.span6
-    h4 Search for a new Artist
+    h4.mini-header Search for a new Artist
     br
     div.btn-group.row-fluid
       span.span6
@@ -9,10 +9,18 @@ div.row-fluid
         button(ng-click="artist_search()", type="submit", class="btn btn-info") Search
     div(ng-repeat='artist in artists', class="row-fluid")
       span.span3
-        button(ng-click="artist_select({{artist.songkick_id}})", type="submit", class="btn-small btn-success") Find Shows
-      span.span9 {{artist.name}}
+            button(ng-click="artist_select({{artist.songkick_id}})", type="submit", class="btn-small btn-success") Find Shows
+          span.span9 {{artist.name}}
   div.span6
-    div.row-fluid
-      div(ng-repeat='prev_artist in prev_artists', class="span3")
-        span Previous Artists:  {{prev_artist.name}}
+    h4.mini-header Try Some Previous Artists
+    br
+    div(ng-repeat='prev_artist in prev_artists', class="row-fluid prev-artists")
+      span.span6.offset1 {{prev_artist.name}}
+      span.span3
         a(href='shows/{{prev_artist.songkick_id}}') Find Shows
+  div.span12#hottt-section
+    h4.mini-header Or try some of the top HOTTT artists from Echo Nest
+  div.span12
+    ul.inline
+      li(ng-repeat='hottt in hottt_artists', class="hottt")
+        a(href='shows/{{hottt.songkick_id}}') {{hottt.name}}

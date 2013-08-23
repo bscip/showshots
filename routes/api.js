@@ -5,9 +5,28 @@ var APIEchoNest = require('../util/echonest.js'),
 var DB = require('../util/db.js').DB;
 var db = new DB();
 
+exports.find_samples = function(req, res) {
+    db.findSample(function(err, samples) {
+        res.json({
+            samples: samples
+        });
+    });
+};
 
 exports.echonest_artist_search = function(req, res) {
     APIEchoNest.artist_search(req.body.artist_input, function(artists) {
+        var ret = false;
+        if (artists !== undefined) {
+            ret = JSON.parse(artists);
+        }
+        res.json({
+            artists: ret
+        });
+    });
+};
+
+exports.echonest_hottt = function(req, res) {
+    APIEchoNest.hottt(function(artists) {
         var ret = false;
         if (artists !== undefined) {
             ret = JSON.parse(artists);
@@ -120,7 +139,7 @@ exports.find_shows = function(req, res) {
 };
 
 exports.find_images = function(req, res) {
-    db.findImages(req.body.params, function(err, shows) {
+    db.findImages(req.body.params, function(err, images) {
         res.json({
             images: images
         });

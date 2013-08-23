@@ -6,17 +6,22 @@ block body
       ul.nav.nav-pills.pull-right
         li.active
           a(href='/') Home
-        li
-          a(href='/') About
       h2.text-info Show Shots
     hr
     div#main(ng-view)
     hr
     div.footer
-      span#footer.pull-right.muted  (Echo Nest) + (Songkick) + (Flickr)
+      span#footer.pull-right.muted  Powered By 
+        a(href="http://www.echonest.com/") Echo Nest
+        span +
+        a(href="http://www.songkick.com/") Songkick
+        span +
+        a(href="http://www.flickr.com/") Flickr
       
 
   script(src='/js/lib/angular.js')
+  script(src='/js/lib/angular-resource.js')
+  script(src='/js/lib/jquery-2.0.3.js')
   script(src='/js/lib/bootstrap-javascript/bootstrap.js')
   script(src='/js/app.js')
   script(src='/js/controllers.js')

@@ -3,9 +3,14 @@
 function Page1Ctrl($scope, $http, $location, $routeParams) {
     var searched_artists = [];
 
-    $http.put('/api/findArtists', {}).
+    $http.get('/api/samples', {}).
         success(function(data, status, headrs, config) {
-            $scope.prev_artists = data.artists;
+            $scope.prev_artists = data.samples;
+        });
+
+    $http.get('/api/hottt', {}).
+        success(function(data, status, headrs, config) {
+            $scope.hottt_artists = data.artists;
         });
 
     $scope.artist_search = function() {
@@ -26,19 +31,32 @@ function Page1Ctrl($scope, $http, $location, $routeParams) {
     };
 }
 
-function Page2Ctrl($scope, $http, $location, $routeParams) {
-    var searched_shows = [];
+function Page2Ctrl($scope, $http, $location, $routeParams, $resource) {
+    var found_shows = [];
+    var PreSearch = $resource('/api/imgs/:id', {id:'@id'}, {preFetchImages:{method:'POST'}});
 
     $http.post('/api/sg/'+$routeParams.id, {'songkick_id':$routeParams.id}).
         success(function(data, status, headers, config) {
-            data.shows.forEach(function(show,i) {
-                searched_shows[show.songkick_event_id] = show;
-            });
             $scope.shows = data.shows;
+            $scope.shows.forEach(function(show,i) {
+                show.images_pre_fetched = false;
+                show.images_found = false;
+                show.num_images = 0;
+                found_shows[show.songkick_event_id] = show;
+            });
+            data.shows.forEach(function(show,i) {
+                PreSearch.preFetchImages({id:show.songkick_event_id}, {params:show}, function(data, status, headers, config) {
+                    found_shows[show.songkick_event_id].images_pre_fetched = true;
+                    found_shows[show.songkick_event_id].num_images = data.images.length;
+                    if (data.images.length > 0) {
+                        found_shows[show.songkick_event_id].images_found = true;
+                    }
+                });
+            });
         });
 
     $scope.show_select = function(show_selected) {
-        $http.put('/api/saveShow', {'params':searched_shows[show_selected]}).
+        $http.put('/api/saveShow', {'params':found_shows[show_selected]}).
             success(function(data, status, headers, config) {
                 $location.url('/images/'+show_selected);
             });

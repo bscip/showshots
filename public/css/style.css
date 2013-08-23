@@ -3,6 +3,10 @@ body {
     background:  url(/images/g_pix.png) repeat 0 0;
 }
 
+#main {
+    min-height: 400px;
+}
+
 .center {
     float: none;
     margin: 0 auto;
@@ -12,8 +16,25 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lobster', Georgia, Times, serif;
 }
+
 p, div {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.mini-header {
+    padding: 10px;    
+    margin:  10px 10px;
+}
+
+#hottt-section {
+    margin: 20px 0px 0px 0px;
+    text-align: center;
+}
+
+.hottt {
+    float: none;
+    margin: 5px 5px;
+    text-align: center;
 }
 
 .show-row {
@@ -25,6 +46,17 @@ p, div {
     margin: auto 5;
 }
 
+.show-btn {
+    width: 150px;
+}
+
+.show-details {
+    font-size: 12pt;
+    margin: 5px auto auto auto;
+}
+
 #footer {
     font-size: 10pt;
 }
+
+

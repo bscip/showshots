@@ -4,6 +4,7 @@ div.row-fluid
   hr
   div(ng-repeat='show in shows', class="row-fluid show-row")
     span.span2
-      button(ng-click="show_select({{show.songkick_event_id}})", type="submit", class="btn-small btn-success") Find Images
-    span.10
+      button(ng-click="show_select({{show.songkick_event_id}})", type="submit", class="btn-small show-btn {{ show.images_found ? 'btn-success' : 'btn-inverse' }}") {{ show.images_pre_fetched ? show.num_images+' Images Found' : '(searching)' }}
+    span.span10.show-details
       {{show.show_details}}
+    hr

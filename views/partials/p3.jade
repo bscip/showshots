@@ -2,6 +2,7 @@ div.row-fluid
   div.span12
     h4 Here are the images for the show
   div.row-fluid
-    span(ng-repeat='image in images', class="span3")
-      a(href="{{image.url}}", target="_blank")
-        img(ng-src="{{image.url_m}}", class="img-polaroid")
+    ul.inline
+      li(ng-repeat='image in images', class="span3")
+        a(href="{{image.url}}", target="_blank")
+          img(ng-src="{{image.url_m}}", class="img-polaroid")

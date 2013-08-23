@@ -36,12 +36,12 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // API:
-app.get('/api/pa', api.find_artists);
+app.get('/api/samples', api.find_samples);
+app.get('/api/hottt', api.echonest_hottt);
 app.post('/api/enas/:name', api.echonest_artist_search);
 app.post('/api/sg/:id', api.songkick_gigography);
 app.post('/api/imgs/:id', api.flickr_image_search);
 
-// DB Endpoints
 app.put('/api/saveArtist', api.save_artist);
 app.put('/api/saveShow', api.save_show);
 app.put('/api/saveImage', api.save_image);

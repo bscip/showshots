@@ -27,3 +27,27 @@ APIEchoNest.artist_search = function (artist_input, cb) {
         cb(JSON.stringify(artists));
     });
 };
+
+APIEchoNest.hottt = function (cb) {
+    var url = 'http://developer.echonest.com/api/v4/artist/top_hottt?';
+        url += 'api_key='+secret.echonest_api_key;
+        url += '&format=json';
+        url += '&bucket=id:songkick';
+        url += '&results=100';
+
+    var artists = [];
+    request.get({url: url, json: true}, function(error, resp, data) {
+        data.response.artists.forEach(function (artist, i) {
+            if (artist.foreign_ids !== undefined &&
+                artist.foreign_ids[0].catalog == 'songkick') {
+                var a = {};
+                a.name = artist.name;
+                a.echo_nest_id = artist.id;
+                a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
+                artists.push(a);
+            }
+        });
+        
+        cb(JSON.stringify(artists));
+    });
+};

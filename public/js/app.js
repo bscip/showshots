@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('showshotsApp', 
-    ['showshotsApp.filters', 'showshotsApp.services', 'showshotsApp.directives']).
+    ['showshotsApp.filters', 'showshotsApp.services', 'showshotsApp.directives', 'ngResource']).
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.
             when('/', {
