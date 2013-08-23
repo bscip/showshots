@@ -1,4 +1,4 @@
-# Show Shots
+Show Shots
 Simple app for finding concert photos from selected artists.
 
 The data comes from a mashup of:
