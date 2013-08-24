@@ -9,7 +9,9 @@ var APIEN = new APIEchoNest(secret.echonest_api_key),
     APIS  = new APISongkick(secret.songkick_api_key),
     APIF  = new APIFlickr(secret.flickr_api_key);
 
+// DB should share connection with app
 var db = new DB();
+
 exports.find_samples = function(req, res) {
     db.findSample(function(err, samples) {
         res.json({

@@ -1,5 +1,6 @@
 var request = require('request');
 
+// Flickr API module
 var APIFlickr = (function () {
     var API_KEY;
 

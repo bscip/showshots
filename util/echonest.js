@@ -1,5 +1,6 @@
 var request = require('request');
 
+// EchoNest API module
 var APIEchoNest = (function () {
     var API_KEY;
 

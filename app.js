@@ -16,7 +16,7 @@ var db = new DB();
 db.open();
 
 // all environments
-app.set('port', process.env.PORT || 3008);
+app.set('port', process.env.PORT || 3009);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());

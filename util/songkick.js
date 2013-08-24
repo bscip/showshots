@@ -1,5 +1,6 @@
 var request = require('request');
 
+// Songkick API module
 var APISongkick = (function () {
     var API_KEY;
 
