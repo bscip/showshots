@@ -1,10 +1,15 @@
-var APIEchoNest = require('../util/echonest.js'),
+// Vender APIs:
+var APIEchoNest = require('../util/echonest.js');
     APISongkick = require('../util/songkick.js'),
     APIFlickr   = require('../util/flickr.js');
+    DB          = require('../util/db.js').DB;
 
-var DB = require('../util/db.js').DB;
+var secret = require('../util/secret.js');
+var APIEN = new APIEchoNest(secret.echonest_api_key),
+    APIS  = new APISongkick(secret.songkick_api_key),
+    APIF  = new APIFlickr(secret.flickr_api_key);
+
 var db = new DB();
-
 exports.find_samples = function(req, res) {
     db.findSample(function(err, samples) {
         res.json({
@@ -14,7 +19,7 @@ exports.find_samples = function(req, res) {
 };
 
 exports.echonest_artist_search = function(req, res) {
-    APIEchoNest.artist_search(req.body.artist_input, function(artists) {
+    APIEN.artist_search(req.body.artist_input, function(artists) {
         var ret = false;
         if (artists !== undefined) {
             ret = JSON.parse(artists);
@@ -26,7 +31,7 @@ exports.echonest_artist_search = function(req, res) {
 };
 
 exports.echonest_id_search = function(req, res) {
-    APIEchoNest.artist_songkick_id_search(req.body.songkick_id, function(artists) {
+    APIEN.artist_songkick_id_search(req.body.songkick_id, function(artists) {
         var ret = false;
         if (artists !== undefined) {
             ret = JSON.parse(artists);
@@ -38,7 +43,7 @@ exports.echonest_id_search = function(req, res) {
 };
 
 exports.echonest_hottt = function(req, res) {
-    APIEchoNest.hottt(function(artists) {
+    APIEN.hottt(function(artists) {
         var ret = false;
         if (artists !== undefined) {
             ret = JSON.parse(artists);
@@ -50,7 +55,7 @@ exports.echonest_hottt = function(req, res) {
 };
 
 exports.songkick_gigography = function(req, res) {
-    APISongkick.artist_gigography(req.body.songkick_id, function(shows) {
+    APIS.artist_gigography(req.body.songkick_id, function(shows) {
         var ret = false;
         if (shows !== undefined) {
             ret = JSON.parse(shows);
@@ -62,7 +67,7 @@ exports.songkick_gigography = function(req, res) {
 };
 
 exports.songkick_event_lookup = function(req, res) {
-    APISongkick.event_lookup(req.body.songkick_event_id, function(shows) {
+    APIS.event_lookup(req.body.songkick_event_id, function(shows) {
         var ret = false;
         if (shows !== undefined) {
             ret = JSON.parse(shows);
@@ -74,7 +79,7 @@ exports.songkick_event_lookup = function(req, res) {
 };
 
 exports.flickr_image_search = function(req, res) {
-    APIFlickr.image_search(req.body.params, function(images) {
+    APIF.image_search(req.body.params, function(images) {
         var ret = false;
         if (images !== undefined) {
             ret = JSON.parse(images);
