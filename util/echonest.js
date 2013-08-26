@@ -20,16 +20,18 @@ var APIEchoNest = (function () {
         var artists = [];
         console.log("APIEchonest:  "+url);
         request.get({url: url, json: true}, function(error, resp, data) {
-            data.response.artists.forEach(function (artist, i) {
-                if (artist.foreign_ids !== undefined &&
-                    artist.foreign_ids[0].catalog == 'songkick') {
-                    var a = {};
-                    a.name = artist.name;
-                    a.echo_nest_id = artist.id;
-                    a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
-                    artists.push(a);
-                }
-            });
+            if (data.response.artists !== undefined) {
+                data.response.artists.forEach(function (artist, i) {
+                    if (artist.foreign_ids !== undefined &&
+                        artist.foreign_ids[0].catalog == 'songkick') {
+                        var a = {};
+                        a.name = artist.name;
+                        a.echo_nest_id = artist.id;
+                        a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
+                        artists.push(a);
+                    }
+                });
+            }
             
             cb(JSON.stringify(artists));
         });
@@ -46,17 +48,19 @@ var APIEchoNest = (function () {
         var artist;
         console.log("APIEchonest:  "+url);
         request.get({url: url, json: true}, function(error, resp, data) {
-            artist = data.response.artist;
-            if (artist.foreign_ids !== undefined &&
-                artist.foreign_ids[0].catalog == 'songkick') {
-                var a = {};
-                a.name = artist.name;
-                a.echo_nest_id = artist.id;
-                a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
-                artists.push(a);
+            if (data.response.artist !== undefined) {
+                artist = data.response.artist;
+                if (artist.foreign_ids !== undefined &&
+                    artist.foreign_ids[0].catalog == 'songkick') {
+                    var a = {};
+                    a.name = artist.name;
+                    a.echo_nest_id = artist.id;
+                    a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
+                    artists.push(a);
+                }
+                
+                cb(JSON.stringify(artists));
             }
-            
-            cb(JSON.stringify(artists));
         });
     };
 
@@ -70,16 +74,18 @@ var APIEchoNest = (function () {
         var artists = [];
         console.log("APIEchonest:  "+url);
         request.get({url: url, json: true}, function(error, resp, data) {
-            data.response.artists.forEach(function (artist, i) {
-                if (artist.foreign_ids !== undefined &&
-                    artist.foreign_ids[0].catalog == 'songkick') {
-                    var a = {};
-                    a.name = artist.name;
-                    a.echo_nest_id = artist.id;
-                    a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
-                    artists.push(a);
-                }
-            });
+            if (data.response.artists !== undefined) {
+                data.response.artists.forEach(function (artist, i) {
+                    if (artist.foreign_ids !== undefined &&
+                        artist.foreign_ids[0].catalog == 'songkick') {
+                        var a = {};
+                        a.name = artist.name;
+                        a.echo_nest_id = artist.id;
+                        a.songkick_id = artist.foreign_ids[0].foreign_id.split(/[: ]/).pop();
+                        artists.push(a);
+                    }
+                });
+            }
             
             cb(JSON.stringify(artists));
         });

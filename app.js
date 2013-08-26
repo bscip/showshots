@@ -1,22 +1,24 @@
-
-/**
- * Module dependencies.
- */
-
+ // Module dependencies
 var express = require('express'),
     routes = require('./routes'),
-    api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
+
+// Declare and open database instance for app
+// Any routes that need to access models should have the instance passed 
+var DB = require('./util/db'),
+    db = new DB({db_address:'mongodb://localhost/test2'});
+    db.open();
+
+// Open routes for the app
+var API = require('./routes/api'),
+    api = new API(db);
+
 var app = express();
 
-var DB = require('./util/db.js').DB;
-var db = new DB();
-db.open();
-
 // all environments
-app.set('port', process.env.PORT || 3009);
+app.set('port', process.env.PORT || 3008);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -36,12 +38,13 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // API:
-app.get('/api/samples', api.find_samples);
 app.get('/api/hottt', api.echonest_hottt);
 app.post('/api/enas/:name', api.echonest_artist_search);
 app.post('/api/enids/:id', api.echonest_id_search);
+
 app.post('/api/sg/:id', api.songkick_gigography);
 app.post('/api/se/:id', api.songkick_event_lookup);
+
 app.post('/api/imgs/:id', api.flickr_image_search);
 
 app.put('/api/saveArtist', api.save_artist);
@@ -52,9 +55,13 @@ app.post('/api/findArtists', api.find_artists);
 app.post('/api/findShows', api.find_shows);
 app.post('/api/findImages', api.find_images);
 
+app.get('/api/samples', api.find_samples);
+
 
 // redirect back to index (HTML5 hist)
 app.get('*', routes.index);
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

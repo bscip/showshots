@@ -15,14 +15,14 @@ var APIFlickr = (function () {
             url += '&api_key='+API_KEY;
             url += '&min_taken_date='+params.min_time;
             url += '&max_taken_date='+params.max_time;
-            url += '&tags='+encodeURIComponent(params.performers+','+params.venue_name);
+            url += '&tags='+encodeURIComponent(params.main_artist+','+params.venue_name);
             url += '&extras=url_s,url_m,url_l';
             url += '&per_page=200';
             url += '&media=photos';
             url += '&nojsoncallback=1';
 
         var images = [];
-        console.log("APIFlickr:  "+url);
+        console.log((new Date(Date.now())).toISOString()+" APIFlickr:  "+url);
         request.get({url: url, json: true}, function(error, resp, data) {
             if (data.photos !== undefined) {
                 data.photos.photo.forEach(function (img, i) {
