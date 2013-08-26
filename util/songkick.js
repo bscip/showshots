@@ -45,7 +45,7 @@ var APISongkick = (function () {
     //  private helper function
     function process_event_data(show, skid) {
         var d = new Date(show.start.date);
-        var max_time = Math.round(new Date(d.setHours(d.getHours()+12)).getTime()/1000);
+        var min_time = Math.round(new Date(d.setHours(d.getHours()+12)).getTime()/1000);
         var max_time = Math.round(new Date(d.setHours(d.getHours()+36)).getTime()/1000);
         // if we have more accurate start time
         if (show.start.datetime !== null) {

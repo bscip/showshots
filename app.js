@@ -8,7 +8,7 @@ var express = require('express'),
 // Declare and open database instance for app
 // Any routes that need to access models should have the instance passed 
 var DB = require('./util/db'),
-    db = new DB({db_address:'mongodb://localhost/test2'});
+    db = new DB({db_address:'mongodb://localhost/showshots'});
     db.open();
 
 // Open routes for the app
@@ -18,7 +18,7 @@ var API = require('./routes/api'),
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3008);
+app.set('port', process.env.PORT || 3009);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
